@@ -1,0 +1,25 @@
+apiVersion: v1
+kind: Pod 
+metadata:
+    name: busybox-test1
+    labels:
+        name: busybox-test1
+spec:
+    restartPolicy: Never
+    containers:
+    - resources:
+        limits:
+          cpu: 0.2
+      image: gcr.io/google_containers/busybox
+      command:
+         - "/bin/sh"
+         - "-c"
+         - "while true; do date >> /mnt/test/pod-out.txt; sleep 5; done"
+      name: busybox1
+      volumeMounts:
+      - name: vol
+        mountPath: /mnt/test
+    volumes:
+        - name: vol
+          persistentVolumeClaim:
+             claimName: myclaim1
