@@ -1,0 +1,17 @@
+apiVersion: extensions/v1beta1
+kind: Deployment
+metadata:
+  name: 'test-deployment'
+  namespace: default
+spec:
+  replicas: 2
+  template:
+    metadata:
+      labels:
+        name: 'test-deployment'
+    spec:
+      containers:
+        - image: nginx
+          name: 'test-deployment'
+          ports:
+            - containerPort: 9080
